@@ -21,7 +21,7 @@ const cssRoutes = require("./src/public/main.css");
 app.use(leaveNoteRoutes);
 app.use(readNoteRoutes);
 app.use(homeRoutes);
-app.use(cssRoutes);
+// app.use(cssRoutes);
 
 //catch-all route/middleware
 app.use((req, res, next) => {
