@@ -23,7 +23,6 @@ router.post("/leave", (req, res, next) => {
   fs.appendFile("message.txt", message, (err) => {
     console.log(err);
     if (err) throw err;
-    // console.log("bbbbbb");
     res.statusCode = 302;
     return res.redirect("/read");
   });
