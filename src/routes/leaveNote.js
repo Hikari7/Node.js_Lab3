@@ -6,6 +6,7 @@ const router = express.Router();
 // const rootDir = require("../utils/path-heloper");
 
 //middleware的な
+//action: フォームが送信されたときに処理のためにデータが送信されるURL
 router.get("/leave", (req, res, next) => {
   res.send(`
   <form action="/leave" method="POST">
@@ -15,19 +16,16 @@ router.get("/leave", (req, res, next) => {
 `);
 });
 
-//body comes from body
-
 router.post("/leave", (req, res, next) => {
-  req.on("end", () => {
-    const parsedBody = Buffer.concat(body).toString();
-    const message = parsedBody.split("=")[1];
+  const { name } = req.body;
 
-    fs.writeFile("message.txt", message, (err) => {
-      if (err) throw err;
-      res.statusCode = 302;
-      res.setHeader("Location", "/read");
-      return res.end();
-    });
+  const message = "\n" + name;
+  fs.appendFile("message.txt", message, (err) => {
+    console.log(err);
+    if (err) throw err;
+    // console.log("bbbbbb");
+    res.statusCode = 302;
+    return res.redirect("/read");
   });
 });
 

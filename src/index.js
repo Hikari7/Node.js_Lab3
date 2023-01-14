@@ -1,18 +1,22 @@
 //import 3rd party modules
-const express = require("express");
 const bodyParser = require("body-parser");
+const express = require("express");
+const path = require("path");
 
 //initialize express and body-parser
 const app = express();
+
+// app.use(express.static(__dirname + "public/main.css"));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //import routes
-const leaveNoteRoutes = require("./src/routes/leaveNote");
-const readNoteRoutes = require("./src/routes/readNote");
-const homeRoutes = require("./src/routes/home");
 
-//なんでうまくImportされないんですかね？？？
-const cssRoutes = require("./src/public/main.css");
+const leaveNoteRoutes = require("./routes/leaveNote");
+const readNoteRoutes = require("./routes/readNote");
+const homeRoutes = require("./routes/home");
+
 
 //routes
 //もし第一引数に"/member"みたいなパスを入れたらそれが親のパスみたいになる、kinda concatenate
@@ -21,9 +25,8 @@ const cssRoutes = require("./src/public/main.css");
 app.use(leaveNoteRoutes);
 app.use(readNoteRoutes);
 app.use(homeRoutes);
-// app.use(cssRoutes);
 
-//catch-all route/middleware
+//catch-all(全部受け取る) route/middleware
 app.use((req, res, next) => {
   res.status(404).send("<h1>Page not found</h1>");
 });

@@ -6,15 +6,13 @@ const path = require("path");
 const rootDir = require("../utils/path-heloper");
 
 router.get("/read", (req, res, next) => {
-  console.log("Note: ", req.body.name);
-  //   res.sendFile("view.html");
-  // res.sendFile(path.join(rootDir, "src", "views", "view.html"));
-  //   res.sendFile(path.join(rootDir, "src", "public", "main.css"));
-  //   res.redirect("/");
+  // const name = req.body;
+  // console.log("Note: ", req.body.name);
 
-  fs.readFile(rootDir, (err, content) => {
+  
+  fs.readFile(path.join(rootDir, "message.txt"), (err, content) => {
     if (err) {
-      console.log("Error😭");
+      console.log(err);
       res.end();
     } else {
       res.writeHead(200, { "Content-Type": "text/html" });

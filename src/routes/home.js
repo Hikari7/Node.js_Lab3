@@ -13,7 +13,7 @@ const router = express.Router();
 // });
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "src", "views", "homepage.html"));
+  res.sendFile(path.join(rootDir, "views", "homepage.html"));
 });
 
 module.exports = router;
